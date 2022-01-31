@@ -1,0 +1,105 @@
+
+R version 4.1.1 (2021-08-10) -- "Kick Things"
+Copyright (C) 2021 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(zipfR)
+> read.spc(file=file.choose())
+  m  Vm
+1 1 314
+2 2 162
+3 3 110
+4 4 108
+5 5  94
+6 6  63
+7 7  71
+8 8  60
+9 9  43
+
+    N    V
+ 3612 1025
+> data<-read.spc(file.file.choose())
+Error in file.file.choose() : could not find function "file.file.choose"
+> data<-read.spc(file=file.choose())
+> data
+  m  Vm
+1 1 314
+2 2 162
+3 3 110
+4 4 108
+5 5  94
+6 6  63
+7 7  71
+8 8  60
+9 9  43
+
+    N    V
+ 3612 1025
+> summary(data.spc)
+Error in summary(data.spc) : object 'data.spc' not found
+> summary(data)
+zipfR object for frequency spectrum
+Sample size:     N  = 3612 
+Vocabulary size: V  = 1025 
+Class sizes:     Vm = 314 162 110 108 94 63 71 60 ...
+> Vm(data,1:9)
+[1] 314 162 110 108  94  63  71  60  43
+> plot(data)
+> plot(data,log="x")
+> with(data,plot(m,Vm,main="Frequency Spectrum"))
+>  data.bin.vgc <- vgc.interp(data.spc, N(data.emp.vgc), m.max=1)
+Error in vgc.interp(data.spc, N(data.emp.vgc), m.max = 1) : 
+  object 'data.spc' not found
+> data.fzm <- lnre("fzm", data, exact=FALSE)
+> data.fzm <- lnre("fzm", data, exact=TRUE)
+> summary(data.fzm)
+finite Zipf-Mandelbrot LNRE model.
+Parameters:
+   Shape:          alpha = 8.34374e-09 
+   Lower cutoff:       A = 0.0001027497 
+   Upper cutoff:       B = 0.002468985 
+ [ Normalization:      C = 422.6122 ]
+Population size: S = 1343.597 
+Sampling method: Poisson, with exact calculations.
+
+Parameters estimated from sample of size N = 3612:
+                   V     V1     V2     V3     V4    V5    
+   Observed: 1025.00 314.00 162.00 110.00 108.00 94.00 ...
+   Expected: 1025.24 291.53 199.62 139.02 103.21 79.63 ...
+
+Goodness-of-fit (multivariate chi-squared test):
+         X2 df            p
+   107.6036 10 1.621899e-18
+>  plot(data, data.fzm., legend=c("observed", "fZM"))
+Error in plot.spc(data, data.fzm., legend = c("observed", "fZM")) : 
+  object 'data.fzm.' not found
+> plot(data,legend=c("observed","fZM"))
+Error in plot.spc(data, legend = c("observed", "fZM")) : 
+  'legend' argument must be character or expression vector of same length as number of spectra
+> plot(data.fzm)
+> plot(data)
+>  plot(data, data.fzm, legend=c("observed", "fZM"))
+Error in plot.spc(data, data.fzm, legend = c("observed", "fZM")) : 
+  'list' object cannot be coerced to type 'logical'
+In addition: Warning message:
+In all(expected) : coercing argument of type 'list' to logical
+>  plot(data.spc, data.fzm.spc, legend=c("observed", "fZM"))
+Error in plot(data.spc, data.fzm.spc, legend = c("observed", "fZM")) : 
+  object 'data.spc' not found
+> 
